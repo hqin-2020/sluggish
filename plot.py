@@ -26,15 +26,23 @@ mpl.style.use('classic')
 mpl.rcParams["lines.linewidth"] = 5
 
 parser = argparse.ArgumentParser(description="parameters")
+
+parser.add_argument("--boundc",type=int)
+
 parser.add_argument("--rho", type=float)
 parser.add_argument("--gamma", type=float)
+parser.add_argument("--kappa",type=float)
+parser.add_argument("--zeta",type=float)
+
 parser.add_argument("--epsilon", type=float)
 parser.add_argument("--fraction", type=float)
 parser.add_argument("--maxiter", type=float)
-parser.add_argument("--dataname",type=str)
-parser.add_argument("--figname",type=str)
-parser.add_argument("--A1cap",type=float)
-# parser.add_argument("--A2cap",type=float)
+
+parser.add_argument("--output",type=str)
+parser.add_argument("--action_name",type=str)
+
+parser.add_argument("--hW1",type=float)
+parser.add_argument("--hW2",type=float)
 
 args = parser.parse_args()
 
@@ -45,8 +53,6 @@ args = parser.parse_args()
 
 rho = args.rho
 gamma = args.gamma
-A1cap = args.A1cap
-A2cap = A1cap
 
 phi1 = 28.0
 phi2 = 28.0
@@ -55,8 +61,8 @@ eta2 = 0.013
 
 a11 = 0.014
 alpha = 0.05
-zeta = 0.5
-kappa = 0.0
+zeta = args.zeta
+kappa = args.kappa
 
 delta = 0.002 
 
@@ -68,7 +74,6 @@ sigma_z1 = np.array([ .011*np.sqrt(5), .011*np.sqrt(5) , .025])
 beta1 = 0.01
 beta2 = 0.01
 
-
 #==============================================================================#
 #    Grids
 #==============================================================================#
@@ -77,20 +82,20 @@ ymin = -np.log(20)
 ymax = np.log(20)
 
 zmin = -0.75
-zmax = 0.75
+zmax = -zmin
 
 kamin = -1
 kamax = 1
 
 W1_min = ymin
 W1_max = ymax
-hW1 = 0.06
+hW1 = args.hW1
 W1 = np.arange(W1_min, W1_max+hW1, hW1)
 nW1 = len(W1)
 
 W2_min = zmin
 W2_max = zmax
-hW2 = 0.015
+hW2 = args.hW2
 W2 = np.arange(W2_min, W2_max+hW2, hW2)
 nW2 = len(W2)
 
@@ -119,24 +124,21 @@ print("Grid step: [{}, {}, {}]\n".format(hW1, hW2, hW3))
 dVec = np.array([hW1, hW2, hW3])
 increVec = np.array([1, nW1, nW1*nW2], dtype=np.int32)
 
-Data_Dir = "./data/"+args.dataname+"/"
-res = pickle.load(open(Data_Dir + "result_rho_{}_eps_{}_frac_{}_A1cap_{}_A2cap_{}".format(rho,epsilon,fraction,A1cap,A2cap),"rb"))
+boundc = args.boundc
+if boundc == 0:
+    bc = "Natural"
+elif boundc == 1:
+    bc = "Mix"
+elif boundc == 2:
+    bc = "Neumann"
+elif boundc == 3:
+    bc = "Natural Two Dimension"
 
-# res = {
-#     "V0": V0,
-#     "i1_star": i1_star,
-#     "i2_star": i2_star,
-#     "c": c,
-#     "k1a":k1a,
-#     "k2a":k2a,
-#     "h1_star": h1_star,
-#     "h2_star": h2_star,
-#     "hz_star": hz_star,
-#     "FC_Err": FC_Err,
-#     "W1": W1,
-#     "W2": W2,
-#     "W3": W3,
-# }
+print("Boundary condition:", bc)
+
+datadir = "./output/"+args.output+"/"
+os.makedirs(datadir, exist_ok=True)
+res = pickle.load(open(datadir + "result_frac_{}_eps_{}_rho_{}_gamma_{}_kappa_{}_zeta_{}".format(fraction,epsilon,rho,gamma,kappa,zeta),"rb"))
 
 W1 = res["W1"]
 W2 = res["W2"]
@@ -152,7 +154,7 @@ PDE_rhs = res["PDE_rhs"]
 V0 = res["V0"]
 c = res["c"]
 
-Fig_Dir = "./figure/"+args.figname+"/eps_{}".format(epsilon)+"/frac_{}".format(fraction)+"/A1cap_{}_A2cap_{}".format(A1cap,A2cap)+"/"
+Fig_Dir = "./figure/"+args.output+"/frac_{}".format(fraction)+"/eps_{}".format(epsilon)+"/rho_{}_gamma_{}_kappa_{}_zeta_{}".format(rho,gamma,kappa,zeta)+"/"
 
 os.makedirs(Fig_Dir, exist_ok=True)
 

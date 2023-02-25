@@ -3,52 +3,48 @@
 epsilonarray=(0.1 0.01 0.005 0.001)
 fractionarray=(0.1 0.01 0.005 0.001)
 
-actiontime=1
+python_name="run.py"
 
-python_name="twocap3dplot.py"
-
-maxiter=5000000
+maxiter=50000
 
 rhoarray=(1.00001)
-
 gammaarray=(8.0)
-Acaparray=(0.0)
-# Acaparray=(0.2 0.3 0.35 0.4 0.45 0.5 0.6 0.7 0.8 0.9 1.0)
-# Acaparray=(0.37 0.38 0.4)
-A1caparray=(0.5 0.6 0.7)
-A2caparray=(0.5 0.6 0.7)
+kappaarray=(0.0)
 
-
+zeta=0.5
+boundcarray=(0 1 2 3)
+hW1=0.06
+hW2=0.015
 for epsilon in ${epsilonarray[@]}; do
     for fraction in "${fractionarray[@]}"; do
         for rho in "${rhoarray[@]}"; do
             for gamma in "${gammaarray[@]}"; do
-                for A1cap in "${Acaparray[@]}"; do
-                    # for A2cap in "${Acaparray[@]}"; do
+                for boundc in "${boundcarray[@]}"; do
+                    for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_natural49_hconstraint"
-                        # action_name="newtestpe3"
+                        action_name="TwoCapital_mul_bc_plot"
 
-                        dataname="${action_name}_${epsilon}_frac_${fraction}"
+                        action_name="${action_name}"
+                        output="${action_name}_bc_${boundc}"
 
-                        mkdir -p ./job-outs/${action_name}/eps_${epsilon}_frac_${fraction}/
+                        mkdir -p ./job-outs/${output}/frac_${fraction}/eps_${epsilon}/
 
-                        if [ -f ./bash/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.sh ]; then
-                            rm ./bash/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.sh
+                        if [ -f ./bash/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh ]; then
+                            rm ./bash/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh
                         fi
 
-                        mkdir -p ./bash/${action_name}/eps_${epsilon}_frac_${fraction}/
+                        mkdir -p ./bash/${output}/frac_${fraction}/eps_${epsilon}/
 
-                        touch ./bash/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.sh
+                        touch ./bash/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh
 
-                        tee -a ./bash/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.sh <<EOF
+                        tee -a ./bash/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh <<EOF
 #! /bin/bash
 
 ######## login
-#SBATCH --job-name=${A1cap}_${epsilon}_${fraction}
-#SBATCH --output=./job-outs/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.out
-#SBATCH --error=./job-outs/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.err
+#SBATCH --job-name=p${boundc}_${fraction}_${epsilon}
+#SBATCH --output=./job-outs/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.out
+#SBATCH --error=./job-outs/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.err
 
 #SBATCH --account=pi-lhansen
 #SBATCH --partition=caslake
@@ -65,7 +61,7 @@ echo "Program starts \$(date)"
 start_time=\$(date +%s)
 # perform a task
 
-python3 -u /project/lhansen/CTU/$python_name  --rho ${rho} --gamma ${gamma}  --A1cap ${A1cap} --epsilon ${epsilon}  --fraction ${fraction}   --maxiter ${maxiter} --dataname ${dataname} --figname ${action_name}
+python3 -u /project/lhansen/sluggish/$python_name  --rho ${rho} --gamma ${gamma} --kappa ${kappa} --zeta ${zeta} --epsilon ${epsilon}  --fraction ${fraction}  --maxiter ${maxiter} --output ${output} --action_name ${action_name} --boundc ${boundc} --hW1 ${hW1} --hW2 ${hW2}
 echo "Program ends \$(date)"
 end_time=\$(date +%s)
 
@@ -76,8 +72,8 @@ eval "echo Elapsed time: \$(date -ud "@\$elapsed" +'\$((%s/3600/24)) days %H hr 
 
 EOF
                         count=$(($count + 1))
-                        sbatch ./bash/${action_name}/eps_${epsilon}_frac_${fraction}/rho_${rho}_gamma_${gamma}_Acap_${A1cap}_plot.sh
-                    # done
+                        sbatch ./bash/${output}/frac_${fraction}/eps_${epsilon}/plot_rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh
+                    done
                 done
             done
         done

@@ -3,7 +3,7 @@
 epsilonarray=(0.1 0.01 0.005 0.001)
 fractionarray=(0.1 0.01 0.005 0.001)
 
-python_name="run.py"
+python_name="plot.py"
 
 maxiter=50000
 

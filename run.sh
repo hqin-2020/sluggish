@@ -14,7 +14,7 @@ kappaarray=(0.0)
 zeta=0.5
 boundcarray=(0 1 2 3)
 hW1=0.06
-hW2=0.015
+hW2=0.002
 for epsilon in ${epsilonarray[@]}; do
     for fraction in "${fractionarray[@]}"; do
         for rho in "${rhoarray[@]}"; do
@@ -23,7 +23,7 @@ for epsilon in ${epsilonarray[@]}; do
                     for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_mul_bc"
+                        action_name="TwoCapital_mul_bc_small_zgrid"
 
                         action_name="${action_name}"
                         output="${action_name}_bc_${boundc}"

@@ -137,7 +137,6 @@ elif boundc == 3:
 print("Boundary condition:", bc)
 
 datadir = "./output/"+args.output+"/"
-os.makedirs(datadir, exist_ok=True)
 res = pickle.load(open(datadir + "result_frac_{}_eps_{}_rho_{}_gamma_{}_kappa_{}_zeta_{}".format(fraction,epsilon,rho,gamma,kappa,zeta),"rb"))
 
 W1 = res["W1"]
@@ -155,7 +154,6 @@ V0 = res["V0"]
 c = res["c"]
 
 Fig_Dir = "./figure/"+args.output+"/frac_{}".format(fraction)+"/eps_{}".format(epsilon)+"/rho_{}_gamma_{}_kappa_{}_zeta_{}".format(rho,gamma,kappa,zeta)+"/"
-
 os.makedirs(Fig_Dir, exist_ok=True)
 
 print("max,min={},{}".format(i1_star[:,:,0].max(),i2_star[:,:,0].min()))

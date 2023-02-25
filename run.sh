@@ -12,7 +12,7 @@ gammaarray=(8.0)
 kappaarray=(0.0)
 
 zeta=0.5
-boundcarray={0 1 2 3}
+boundcarray=(0 1 2 3)
 hW1=0.06
 hW2=0.015
 for epsilon in ${epsilonarray[@]}; do

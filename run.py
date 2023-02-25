@@ -25,7 +25,6 @@ parser.add_argument("--zeta",type=float)
 parser.add_argument("--epsilon", type=float)
 parser.add_argument("--fraction", type=float)
 parser.add_argument("--maxiter", type=float)
-parser.add_argument("--tol", type=float)
 
 parser.add_argument("--output",type=str)
 parser.add_argument("--action_name",type=str)
@@ -144,7 +143,7 @@ ksp.setFromOptions()
 FC_Err = 1
 epoch = 0
 max_iter = args.maxiter
-tol = args.tol
+tol = 1e-6
 fraction = args.fraction
 epsilon = args.epsilon
 print("epislon:", epsilon)

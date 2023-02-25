@@ -61,7 +61,7 @@ echo "Program starts \$(date)"
 start_time=\$(date +%s)
 # perform a task
 
-python3 -u /project/lhansen/sluggish/$python_name  --rho ${rho} --gamma ${gamma} --kappa ${kappa} --zeta ${zeta} --epsilon ${epsilon}  --fraction ${fraction}  --maxiter ${maxiter} --output ${output} --action_name ${action_name} --boundc ${boundc} --hW1 ${hW1} --hW2 ${hW2}  --tol ${tol}
+python3 -u /project/lhansen/sluggish/$python_name  --rho ${rho} --gamma ${gamma} --kappa ${kappa} --zeta ${zeta} --epsilon ${epsilon}  --fraction ${fraction}  --maxiter ${maxiter} --output ${output} --action_name ${action_name} --boundc ${boundc} --hW1 ${hW1} --hW2 ${hW2}
 echo "Program ends \$(date)"
 end_time=\$(date +%s)
 
@@ -72,7 +72,7 @@ eval "echo Elapsed time: \$(date -ud "@\$elapsed" +'\$((%s/3600/24)) days %H hr 
 
 EOF
                         count=$(($count + 1))
-                        sbatch ./bash/${action_name}/frac_${fraction}/eps_${epsilon}/rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh
+                        sbatch ./bash/${output}/frac_${fraction}/eps_${epsilon}/rho_${rho}_gamma_${gamma}_kappa_${kappa}_zeta_${zeta}.sh
                     done
                 done
             done

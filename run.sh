@@ -3,7 +3,7 @@
 epsilonarray=(0.1 0.01 0.005 0.001)
 fractionarray=(0.1 0.01 0.005 0.001)
 
-python_name="twocap3d.py"
+python_name="run.py"
 
 maxiter=50000
 
@@ -23,7 +23,7 @@ for epsilon in ${epsilonarray[@]}; do
                     for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_natural49_hconstraint"
+                        action_name="TwoCapital_mul_bc"
 
                         action_name="${action_name}"
                         output="${action_name}_bc_${boundc}"

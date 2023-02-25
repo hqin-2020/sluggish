@@ -1,0 +1,7 @@
+setup.py
+petsclinearsystem_XDiff.egg-info/PKG-INFO
+petsclinearsystem_XDiff.egg-info/SOURCES.txt
+petsclinearsystem_XDiff.egg-info/dependency_links.txt
+petsclinearsystem_XDiff.egg-info/top_level.txt
+src/petsclinearsystem.c
+src/petsclinearsystemimpl.c

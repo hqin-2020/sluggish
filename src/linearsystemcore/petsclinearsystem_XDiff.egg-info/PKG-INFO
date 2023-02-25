@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: petsclinearsystem-XDiff
+Version: 0.1
+Summary: use petsc to solve HJB with cross-difference term
+Author: Bin Cheng
+Author-email: bin.cheng.chicago@gmail.com
+
+
+Add also reflective boundary conditions.

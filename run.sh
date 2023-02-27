@@ -5,7 +5,7 @@ fractionarray=(0.005)
 
 python_name="run.py"
 
-maxiter=50000
+maxiter=300000
 
 rhoarray=(1.00001)
 gammaarray=(8.0 5.0 3.0 1.00001)

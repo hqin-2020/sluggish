@@ -27,7 +27,7 @@ for epsilon in ${epsilonarray[@]}; do
                     for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_mul_bc_right_sigma"
+                        action_name="TwoCapital_mul_bc_rep_julia"
                         # action_name="TwoCapital_mul_bc_negative_V0"
                         # action_name="TwoCapital_mul_bc_wo_hcons"
 

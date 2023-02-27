@@ -1,10 +1,11 @@
 #! /bin/bash
 
-epsilonarray=(0.1 0.01 0.005 0.001)
-fractionarray=(0.1 0.01 0.005 0.001)
+# epsilonarray=(0.1 0.01 0.005 0.001)
+# fractionarray=(0.1 0.01 0.005 0.001)
 # epsilonarray=(0.005)
 # fractionarray=(0.005)
-
+epsilonarray=(0.005 0.001)
+fractionarray=(0.005 0.001)
 
 python_name="plot.py"
 
@@ -30,6 +31,7 @@ for epsilon in ${epsilonarray[@]}; do
 
                         action_name="TwoCapital_mul_bc_kappa_gamma"
                         action_name="TwoCapital_mul_bc_wo_hcons"
+                        action_name="TwoCapital_mul_bc_negative_V0"
 
                         action_name="${action_name}"
                         output="${action_name}_bc_${boundc}"

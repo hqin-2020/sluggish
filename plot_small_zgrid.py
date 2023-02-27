@@ -321,6 +321,7 @@ fig.update_layout(title= 'Control Variable <br><span style="font-size: 12px;"> r
               title_x = 0.5, title_y = 0.97, height=500, width=1400, title_yanchor = 'top')
 fig.update_layout(margin=dict(t=75))
 fig.write_json(Fig_Dir+"i_eps_{}_frac_{}.json".format(epsilon,fraction))
+fig.write_image(Fig_Dir+"i_eps_{}_frac_{}.png".format(epsilon,fraction))
 
 var_name = ['Log Value Function', 'Capital over Ka']
 
@@ -352,3 +353,4 @@ fig.update_layout(title= 'Value Function <br><span style="font-size: 12px;"> rho
               title_x = 0.5, title_y = 0.97, height=500, width=1200, title_yanchor = 'top')
 fig.update_layout(margin=dict(t=75))
 fig.write_json(Fig_Dir+"v_eps_{}_frac_{}.json".format(epsilon,fraction))
+fig.write_image(Fig_Dir+"v_eps_{}_frac_{}.png".format(epsilon,fraction))

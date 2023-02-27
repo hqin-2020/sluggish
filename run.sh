@@ -1,7 +1,7 @@
 #! /bin/bash
 
-epsilonarray=(0.1 0.01 0.005 0.001)
-fractionarray=(0.1 0.01 0.005 0.001)
+epsilonarray=(0.005)
+fractionarray=(0.005)
 
 python_name="run.py"
 

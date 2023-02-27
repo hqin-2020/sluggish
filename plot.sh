@@ -8,9 +8,9 @@ python_name="plot.py"
 maxiter=50000
 
 rhoarray=(1.00001)
-gammaarray=(8.0)
-kappaarray=(0.0)
-# kappaarray=(-10.0 -5.0 -3.0 -2.0 -1.0 0.0)
+gammaarray=(8.0 5.0 3.0 1.00001)
+# kappaarray=(0.0)
+kappaarray=(-10.0 -5.0 -3.0 -2.0 -1.0 0.0)
 
 zeta=0.5
 boundcarray=(0 1 2 3)
@@ -24,7 +24,7 @@ for epsilon in ${epsilonarray[@]}; do
                     for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_mul_bc"
+                        action_name="TwoCapital_mul_bc_kappa_gamma"
 
                         action_name="${action_name}"
                         output="${action_name}_bc_${boundc}"

@@ -206,13 +206,13 @@ while FC_Err > tol and epoch < max_iter:
     h2 = h2_new * fraction + h2_star*(1-fraction)
     hz = hz_new * fraction + hz_star*(1-fraction)
 
-    h1 = -h1
-    h2 = -h2
-    hz = -hz
+    # h1 = -h1
+    # h2 = -h2
+    # hz = -hz
 
-    h1[h1>=-1e-16] = -1e-16
-    h2[h2>=-1e-16] = -1e-16
-    hz[hz>=-1e-16] = -1e-16
+    # h1[h1>=-1e-16] = -1e-16
+    # h2[h2>=-1e-16] = -1e-16
+    # hz[hz>=-1e-16] = -1e-16
 
 ########################## FDM #############
 

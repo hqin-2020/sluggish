@@ -56,7 +56,7 @@ delta = 0.002
 scale = 1.32
 sigma_1 = scale * np.array([.0048, 0, 0])
 sigma_2 = scale * np.array([ 0, .0048, 0])
-sigma_z1 = np.array([ .011*np.sqrt(5), .011*np.sqrt(5) , .025])
+sigma_z1 = np.array([ .011*np.sqrt(.5), .011*np.sqrt(.5) , .025])
 
 beta1 = 0.01
 beta2 = 0.01

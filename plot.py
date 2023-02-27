@@ -1,6 +1,5 @@
 import pickle
 import time
-# import petsclinearsystem
 import petsclinearsystemXDiff
 from petsc4py import PETSc
 import petsc4py
@@ -14,6 +13,8 @@ petsc4py.init(sys.argv)
 reporterror = True
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 import os
 import argparse
 
@@ -284,3 +285,39 @@ plt.xlim([-0.75, 0.75])
 plt.savefig(Fig_Dir+"ez_eps_{}_frac_{}.png".format(epsilon,fraction))
 plt.close()
 
+
+var_name = ['Investment over Capital', 'Consumption over Ka', 'Capital over Ka']
+
+plot_row_dims      = 1
+plot_col_dims      = 3
+
+plot_color_style   = ['Viridis', 'Plasma']
+plot_color_style   = ['blues','reds', 'greens']
+
+subplot_titles = []
+subplot_types = []
+for row in range(plot_row_dims):
+    subplot_type = []
+    for col in range(plot_col_dims):
+        subplot_titles.append(var_name[col])
+        subplot_type.append({'type': 'surface'})
+    subplot_types.append(subplot_type)
+spacing = 0.1
+fig = make_subplots(rows=plot_row_dims, cols=plot_col_dims, horizontal_spacing=spacing, vertical_spacing=spacing, subplot_titles=(subplot_titles), specs=subplot_types)
+fig.add_trace(go.Surface(z=res['i1_star'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[0], showscale=False, name= 'i1/k1', showlegend=True), row = 1, col = 1)
+fig.add_trace(go.Surface(z=res['i2_star'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[1], showscale=False, name= 'i2/k2', showlegend=True), row = 1, col = 1)
+fig.update_scenes(dict(xaxis_title='log y', yaxis_title='z', zaxis_title='i/k', zaxis = dict(nticks=4, range=[0.0,0.1], tickformat= ".2f")), row = 1, col = 1)
+
+fig.add_trace(go.Surface(z=res['k1a'][:,:,0].T*res['i1_star'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[0], showscale=False, name= 'i1/ka', showlegend=True), row = 1, col = 2)
+fig.add_trace(go.Surface(z=res['k2a'][:,:,0].T*res['i2_star'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[1], showscale=False, name= 'i2/ka', showlegend=True), row = 1, col = 2)
+fig.update_scenes(dict(xaxis_title='log y', yaxis_title='z', zaxis_title='i/ka', zaxis = dict(nticks=4, range=[0.0,0.1], tickformat= ".2f")), row = 1, col = 2)
+fig.update_scenes(dict(aspectmode = 'cube'), row = 1, col = 2)
+
+fig.add_trace(go.Surface(z=res['c'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[2], showscale=False, name= 'c/ka', showlegend=True), row = 1, col = 3)
+fig.update_scenes(dict(xaxis_title='log y', yaxis_title='z', zaxis_title='c/ka', zaxis = dict(nticks=4, range=[0.0,0.1], tickformat= ".2f")), row = 1, col = 3)
+
+fig.update_layout(title= 'Control Variable <br><span style="font-size: 12px;"> rho = '+ str(rho)+\
+              ', gamma = ' + str(gamma) + ', kappa = ' + str(kappa) + ', zeta = ' + str(kappa) +', FC error = ' + str(res['FC_Err']) + '</span>',\
+              title_x = 0.5, title_y = 0.97, height=600, width=1700, title_yanchor = 'top')
+fig.update_layout(margin=dict(t=75))
+fig.write_json(Fig_Dir+"i_eps_{}_frac_{}.json".format(epsilon,fraction))

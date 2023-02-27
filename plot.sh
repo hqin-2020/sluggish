@@ -9,7 +9,7 @@ fractionarray=(0.005 0.001)
 
 python_name="plot.py"
 
-maxiter=1000000
+maxiter=50000
 
 rhoarray=(1.00001)
 gammaarray=(8.0)
@@ -32,6 +32,7 @@ for epsilon in ${epsilonarray[@]}; do
                         action_name="TwoCapital_mul_bc_kappa_gamma"
                         action_name="TwoCapital_mul_bc_wo_hcons"
                         action_name="TwoCapital_mul_bc_negative_V0"
+                        action_name="TwoCapital_mul_bc_right_sigma"
 
                         action_name="${action_name}"
                         output="${action_name}_bc_${boundc}"

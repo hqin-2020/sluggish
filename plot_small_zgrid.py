@@ -321,3 +321,34 @@ fig.update_layout(title= 'Control Variable <br><span style="font-size: 12px;"> r
               title_x = 0.5, title_y = 0.97, height=500, width=1400, title_yanchor = 'top')
 fig.update_layout(margin=dict(t=75))
 fig.write_json(Fig_Dir+"i_eps_{}_frac_{}.json".format(epsilon,fraction))
+
+var_name = ['Log Value Function', 'Capital over Ka']
+
+plot_row_dims      = 1
+plot_col_dims      = 2
+
+plot_color_style   = ['blues','reds', 'greens']
+
+subplot_titles = []
+subplot_types = []
+for row in range(plot_row_dims):
+    subplot_type = []
+    for col in range(plot_col_dims):
+        subplot_titles.append(var_name[col])
+        subplot_type.append({'type': 'surface'})
+    subplot_types.append(subplot_type)
+spacing = 0.1
+fig = make_subplots(rows=plot_row_dims, cols=plot_col_dims, horizontal_spacing=spacing, vertical_spacing=spacing, subplot_titles=(subplot_titles), specs=subplot_types)
+fig.add_trace(go.Surface(z=res['V0'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[2], showscale=False, name= 'V', showlegend=True), row = 1, col = 1)
+fig.update_scenes(dict(xaxis_title='log y', yaxis_title='z', zaxis_title='V', zaxis = dict(nticks=4, range=[-0.00015,0.00015],tickformat= ".5f")), row = 1, col = 1)
+
+fig.add_trace(go.Surface(z=res['k1a'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[0], showscale=False, name= 'k1/ka', showlegend=True), row = 1, col = 2)
+fig.add_trace(go.Surface(z=res['k2a'][:,:,0].T, x=res['W1'], y=res['W2'], colorscale=plot_color_style[1], showscale=False, name= 'k2/ka', showlegend=True), row = 1, col = 2)
+fig.update_scenes(dict(xaxis_title='log y', yaxis_title='z', zaxis_title='i/ka', zaxis = dict(nticks=4, range=[0.0,2.0], tickformat= ".2f")), row = 1, col = 2)
+fig.update_scenes(dict(aspectmode = 'cube'), row = 1, col = 2)
+
+fig.update_layout(title= 'Value Function <br><span style="font-size: 12px;"> rho = '+ str(rho)+\
+              ', gamma = ' + str(gamma) + ', kappa = ' + str(kappa) + ', zeta = ' + str(kappa) +', FC error = ' + str(res['FC_Err']) + '</span>',\
+              title_x = 0.5, title_y = 0.97, height=500, width=1200, title_yanchor = 'top')
+fig.update_layout(margin=dict(t=75))
+fig.write_json(Fig_Dir+"v_eps_{}_frac_{}.json".format(epsilon,fraction))

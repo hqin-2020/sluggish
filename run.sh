@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# epsilonarray=(0.005)
-# fractionarray=(0.005)
-epsilonarray=(0.1 0.01 0.005 0.001)
-fractionarray=(0.1 0.01 0.005 0.001)
+epsilonarray=(0.005 0.001)
+fractionarray=(0.005 0.001)
+# epsilonarray=(0.1 0.01 0.005 0.001)
+# fractionarray=(0.1 0.01 0.005 0.001)
 
 python_name="run.py"
 
@@ -27,7 +27,8 @@ for epsilon in ${epsilonarray[@]}; do
                     for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_mul_bc"
+                        # action_name="TwoCapital_mul_bc"
+                        action_name="TwoCapital_mul_bc_negative_V0"
                         # action_name="TwoCapital_mul_bc_wo_hcons"
 
                         action_name="${action_name}"

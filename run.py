@@ -150,7 +150,7 @@ print("epislon:", epsilon)
 print("fraction:",fraction)
 
 ############ Initialization ############
-V0 = W2_mat**2 + 5
+V0 = W2_mat**2 - 5
 
 i1_star = alpha/3*np.ones(W1_mat.shape)
 i2_star = alpha/3*np.ones(W1_mat.shape)

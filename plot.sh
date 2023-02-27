@@ -2,8 +2,8 @@
 
 epsilonarray=(0.1 0.01 0.005 0.001)
 fractionarray=(0.1 0.01 0.005 0.001)
-epsilonarray=(0.005)
-fractionarray=(0.005)
+# epsilonarray=(0.005)
+# fractionarray=(0.005)
 
 
 python_name="plot.py"
@@ -11,10 +11,10 @@ python_name="plot.py"
 maxiter=50000
 
 rhoarray=(1.00001)
-# gammaarray=(8.0)
-gammaarray=(8.0 5.0 3.0 1.00001)
-# kappaarray=(0.0)
-kappaarray=(-10.0 -5.0 -3.0 -2.0 -1.0 0.0)
+gammaarray=(8.0)
+# gammaarray=(8.0 5.0 3.0 1.00001)
+kappaarray=(0.0)
+# kappaarray=(-10.0 -5.0 -3.0 -2.0 -1.0 0.0)
 
 zeta=0.5
 boundcarray=(0 1 2 3)

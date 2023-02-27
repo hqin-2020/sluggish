@@ -318,6 +318,6 @@ fig.update_scenes(dict(xaxis_title='log y', yaxis_title='z', zaxis_title='c/ka',
 
 fig.update_layout(title= 'Control Variable <br><span style="font-size: 12px;"> rho = '+ str(rho)+\
               ', gamma = ' + str(gamma) + ', kappa = ' + str(kappa) + ', zeta = ' + str(kappa) +', FC error = ' + str(res['FC_Err']) + '</span>',\
-              title_x = 0.5, title_y = 0.97, height=600, width=1700, title_yanchor = 'top')
+              title_x = 0.5, title_y = 0.97, height=500, width=1400, title_yanchor = 'top')
 fig.update_layout(margin=dict(t=75))
 fig.write_json(Fig_Dir+"i_eps_{}_frac_{}.json".format(epsilon,fraction))

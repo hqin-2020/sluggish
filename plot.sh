@@ -8,7 +8,7 @@ fractionarray=(0.005)
 
 python_name="plot.py"
 
-maxiter=50000
+maxiter=1000000
 
 rhoarray=(1.00001)
 gammaarray=(8.0)

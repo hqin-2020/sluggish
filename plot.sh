@@ -28,7 +28,7 @@ for epsilon in ${epsilonarray[@]}; do
                     for kappa in "${kappaarray[@]}"; do
                         count=0
 
-                        action_name="TwoCapital_mul_bc_kappa_gamma"
+                        action_name="TwoCapital_mul_bc"
 
                         action_name="${action_name}"
                         output="${action_name}_bc_${boundc}"

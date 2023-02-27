@@ -5,7 +5,7 @@ fractionarray=(0.005)
 
 python_name="run.py"
 
-maxiter=300000
+maxiter=3000000
 
 rhoarray=(1.00001)
 gammaarray=(8.0 5.0 3.0 1.00001)
@@ -51,7 +51,7 @@ for epsilon in ${epsilonarray[@]}; do
 #SBATCH --partition=caslake
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
-#SBATCH --time=1:00:00
+#SBATCH --time=12:00:00
 
 ####### load modules
 module load python  gcc
